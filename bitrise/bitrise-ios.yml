@@ -1,0 +1,257 @@
+---
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: ios/JasaRaharjaMobileApp.xcodeproj
+    opts:
+      is_expand: false
+  - BITRISE_SCHEME: JasaRaharjaMobileApp
+    opts:
+      is_expand: false
+  - opts:
+      is_expand: true
+    CODE_PUSH_TARGET_VERSION: "<0.1.2"
+  - opts:
+      is_expand: true
+    CODE_PUSH_STAGING_TARGET_VERSION: ">0.9.0 <1.0.0"
+  - opts:
+      is_expand: true
+    CODE_PUSH_PROD_TARGET_VERSION: ">0.9.0 <1.0.0"
+  - opts:
+      is_expand: true
+    JR_NOTIFY_EMAIL: dev-jr@expecc.com
+trigger_map:
+- pattern: '1.0'
+  is_pull_request_allowed: false
+  workflow: 1.x-staging
+- pattern: 0.*
+  is_pull_request_allowed: false
+  workflow: 0.x
+- pattern: master
+  is_pull_request_allowed: false
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.0:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install
+    - script@1.1.0:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm test
+    - script@1.1.0:
+        title: npm install react-native -g
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install -g react-native-cli
+    - script@1.1.0:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.0:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            code-push release-react movis-ios ios -t "*" -d "Development"
+    - script@1.1.0:
+        title: bundle-ios
+        inputs:
+        - content: |-
+            #!/bin/bash
+            react-native bundle --entry-file ./index.ios.js --platform ios --bundle-output ios/main.jsbundle
+    - certificate-and-profile-installer@1.6.0: {}
+    - fastlane@2.1.3:
+        inputs:
+        - lane: ios dev
+    - deploy-to-bitrise-io@1.2.3:
+        inputs:
+        - notify_email_list: "$JR_NOTIFY_EMAIL"
+  0.x:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.1:
+        title: copy Config.prod.js
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            cp ./app/config/Config.prod.js ./app/config/Config.js
+    - script@1.1.0:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install
+    - script@1.1.0:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm test
+    - script@1.1.0:
+        title: npm install react-native -g
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install -g react-native-cli
+    - script@1.1.0:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.0:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            code-push release-react movis-ios ios -t $CODE_PUSH_TARGET_VERSION -d "Staging"
+    - script@1.1.0:
+        title: bundle-ios
+        inputs:
+        - content: |-
+            #!/bin/bash
+            react-native bundle --entry-file ./index.ios.js --platform ios --bundle-output ios/main.jsbundle
+    - certificate-and-profile-installer@1.4.2: {}
+    - fastlane@2.1.3:
+        inputs:
+        - lane: ios beta
+    - deploy-to-bitrise-io@1.2.3:
+        inputs:
+        - notify_email_list: "$JR_NOTIFY_EMAIL"
+  1.x-prod:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.0:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install
+    - script@1.1.0:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm test
+    - script@1.1.0:
+        title: npm install react-native -g
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install -g react-native-cli
+    - script@1.1.0:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.0:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            code-push release-react movis-ios ios -t "$CODE_PUSH_PROD_TARGET_VERSION" -d "Staging"
+    - script@1.1.0:
+        title: bundle-ios
+        inputs:
+        - content: |-
+            #!/bin/bash
+            react-native bundle --entry-file ./index.ios.js --platform ios --bundle-output ios/main.jsbundle
+    - certificate-and-profile-installer@1.4.2: {}
+    - fastlane@2.1.3:
+        inputs:
+        - lane: ios release
+    - deploy-to-bitrise-io@1.2.3:
+        inputs:
+        - notify_email_list: "$JR_NOTIFY_EMAIL"
+  1.x-staging:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.0:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install
+    - script@1.1.0:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm test
+    - script@1.1.0:
+        title: npm install react-native -g
+        inputs:
+        - content: |-
+            #!/bin/bash
+            npm install -g react-native-cli
+    - script@1.1.0:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.0:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            code-push release-react movis-ios ios -t "$CODE_PUSH_STAGING_TARGET_VERSION" -d "Staging"
+    - script@1.1.0:
+        title: bundle-ios
+        inputs:
+        - content: |-
+            #!/bin/bash
+            react-native bundle --entry-file ./index.ios.js --platform ios --bundle-output ios/main.jsbundle
+    - certificate-and-profile-installer@1.4.2: {}
+    - fastlane@2.1.3:
+        inputs:
+        - lane: ios staging
+    - deploy-to-bitrise-io@1.2.3:
+        inputs:
+        - notify_email_list: "$JR_NOTIFY_EMAIL"

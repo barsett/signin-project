@@ -1,0 +1,79 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jasaraharjamobileapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- for NetInfo -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- for Image Picker -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- for GPS -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- for Push Notification -->
+    <permission android:name="com.jasaraharjamobileapp.permission.C2D_MESSAGE"
+                     android:protectionLevel="signature" />
+    <uses-permission android:name="com.jasaraharjamobileapp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- not used
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+	  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+  -->
+
+
+    <application
+      android:allowBackup="true"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:theme="@style/AppTheme">
+      <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyB6xxNfvvKN-vHJuG0TYlFlb1Ric3f07c0"/>
+      <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="69efd8f53c8f2faa625fe5867e5c928c8c6a02dd"/>
+      <activity
+        android:name=".MainActivity"
+        android:theme="@style/SplashTheme"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <!-- for Push Notification -->
+      <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.jasaraharjamobileapp" />
+            </intent-filter>
+      </receiver>
+      <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
+      
+      <service android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService"/>
+      <service
+            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+      </service>
+      <!-- END for Push Notification -->
+
+
+    </application>
+
+</manifest>

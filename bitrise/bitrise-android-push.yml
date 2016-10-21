@@ -1,0 +1,330 @@
+---
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: "./android/build.gradle"
+    opts:
+      is_expand: false
+  - GRADLE_TASK: assembleRelease
+    opts:
+      is_expand: false
+  - GRADLEW_PATH: "./android/gradlew"
+    opts:
+      is_expand: false
+  - opts:
+      is_expand: true
+    CODE_PUSH_TARGET_VERSION: "<0.1.5"
+  - opts:
+      is_expand: true
+    CODE_PUSH_STAGING_TARGET_VERSION: ">0.9.0 <1.0.0"
+  - opts:
+      is_expand: true
+    CODE_PUSH_PROD_TARGET_VERSION: ">0.9.0 <1.0.0"
+trigger_map:
+- pattern: 1.*
+  is_pull_request_allowed: false
+  workflow: 1.x-Staging
+- pattern: 0.1*
+  is_pull_request_allowed: false
+  workflow: 0.x
+- pattern: master
+  is_pull_request_allowed: false
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.0:
+        title: Get keystore
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            ls -l ./android/app
+    - script@1.1.0:
+        title: install node
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+            apt-get install -y nodejs
+
+            node --version
+            npm --version
+
+            npm install npm -g
+            npm --version
+    - script@1.1.0:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install
+    - script@1.1.0:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm test
+    - script@1.1.0:
+        title: install react native cli
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g react-native-cli
+    - script@1.1.0:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.0:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            code-push release-react movis-android android -t "*" -d "Development"
+    before_run:
+    after_run:
+  0.x:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.1:
+        title: copy Config.prod.js
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            cp ./app/config/Config.prod.js ./app/config/Config.js
+    - script@1.1.1:
+        title: Get keystore
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            ls -l ./android/app
+    - script@1.1.1:
+        title: install node
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+            apt-get install -y nodejs
+
+            node --version
+            npm --version
+
+            npm install npm -g
+            npm --version
+    - script@1.1.1:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install
+    - script@1.1.1:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm test
+    - script@1.1.1:
+        title: install react native cli
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g react-native-cli
+    - script@1.1.1:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.1:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            echo "$CODE_PUSH_TARGET_VERSION"
+            code-push release-react movis-android android -t "$CODE_PUSH_TARGET_VERSION" -d "Staging"
+    before_run:
+    after_run:
+  1.x-Staging:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.1:
+        title: copy Config.prod.js
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            cp ./app/config/Config.prod.js ./app/config/Config.js
+    - script@1.1.1:
+        title: Get keystore
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            ls -l ./android/app
+    - script@1.1.1:
+        title: install node
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+            apt-get install -y nodejs
+
+            node --version
+            npm --version
+
+            npm install npm -g
+            npm --version
+    - script@1.1.1:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install
+    - script@1.1.1:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm test
+    - script@1.1.1:
+        title: install react native cli
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g react-native-cli
+    - script@1.1.1:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.1:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            echo "$CODE_PUSH_TARGET_VERSION"
+            code-push release-react movis-android android -t "$CODE_PUSH_STAGING_TARGET_VERSION" -d "Staging"
+    before_run:
+    after_run:
+  1.x-Prod:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - script@1.1.1:
+        title: copy Config.prod.js
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            cp ./app/config/Config.prod.js ./app/config/Config.js
+    - script@1.1.1:
+        title: Get keystore
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            ls -l ./android/app
+    - script@1.1.1:
+        title: install node
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+            apt-get install -y nodejs
+
+            node --version
+            npm --version
+
+            npm install npm -g
+            npm --version
+    - script@1.1.1:
+        title: npm install
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install
+    - script@1.1.1:
+        title: npm test
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm test
+    - script@1.1.1:
+        title: install react native cli
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g react-native-cli
+    - script@1.1.1:
+        title: install code-push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            npm install -g code-push-cli
+            code-push login --accessKey $JRAPP_CODEPUSH_ACCESS_KEY
+    - script@1.1.1:
+        title: code-push release
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            code-push app ls
+            echo "$CODE_PUSH_TARGET_VERSION"
+            code-push release-react movis-android android -t "$CODE_PUSH_PROD_TARGET_VERSION" -d "Production"
+    before_run:
+    after_run:

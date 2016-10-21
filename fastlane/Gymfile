@@ -1,0 +1,8 @@
+scheme "JasaRaharjaMobileApp"
+
+clean true
+
+output_directory "./build"    # store the ipa in this folder
+export_options(
+  method: "ad-hoc"
+)

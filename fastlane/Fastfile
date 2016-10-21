@@ -1,0 +1,66 @@
+fastlane_version "1.46.1"
+
+platform :ios do
+
+        lane :beta do
+            increment_build_number(
+              xcodeproj: './ios/JasaRaharjaMobileApp.xcodeproj'
+            )
+
+            gym(
+              scheme: "JasaRaharjaMobileApp",
+              project: './ios/JasaRaharjaMobileApp.xcodeproj'
+            )
+            #sh("pwd")
+            #sh("xctool -project ../ios/JasaRaharjaMobileApp.xcodeproj -scheme JasaRaharjaMobileApp clean archive -archivePath ../build/JasaRaharjaMobileApp")
+            #sh("xcodebuild -exportArchive -exportFormat ipa -archivePath ../build/JasaRaharjaMobileApp.xcarchive -exportPath ../build/movis.ipa -exportProvisioningProfile 'iOS Team Provisioning Profile: id.co.jasaraharja.JasaRaharjaMobileApp'")
+
+            sh("cp ../build/movis.ipa $BITRISE_DEPLOY_DIR")
+        end
+
+
+        lane :dev do
+            increment_build_number(
+              xcodeproj: './ios/JasaRaharjaMobileApp.xcodeproj'
+            )
+
+            gym(
+              scheme: "JasaRaharjaMobileApp",
+              configuration: "Dev",
+              project: './ios/JasaRaharjaMobileApp.xcodeproj',
+              output_name: 'movis-dev.ipa',
+            )
+
+            sh("cp ../build/movis-dev.ipa $BITRISE_DEPLOY_DIR")
+        end
+
+        lane :staging do
+            increment_build_number(
+              xcodeproj: './ios/JasaRaharjaMobileApp.xcodeproj'
+            )
+
+            gym(
+              scheme: "JasaRaharjaMobileApp",
+              configuration: "Staging",
+              project: './ios/JasaRaharjaMobileApp.xcodeproj',
+              output_name: 'movis-staging.ipa'
+            )
+
+            sh("cp ../build/movis-staging.ipa $BITRISE_DEPLOY_DIR/movis-staging-$BITRISE_BUILD_NUMBER.ipa")
+        end
+
+        lane :release do
+            increment_build_number(
+              xcodeproj: './ios/JasaRaharjaMobileApp.xcodeproj'
+            )
+
+            gym(
+              scheme: "JasaRaharjaMobileApp",
+              configuration: "Release",
+              project: './ios/JasaRaharjaMobileApp.xcodeproj',
+              output_name: 'movis-prod.ipa',
+            )
+
+            sh("cp ../build/movis-prod.ipa $BITRISE_DEPLOY_DIR/movis-prod-$BITRISE_BUILD_NUMBER.ipa")
+        end
+end
