@@ -14,7 +14,6 @@ app:
       is_expand: false
   - opts:
       is_expand: true
-    JR_NOTIFY_EMAIL: dev-jr@expecc.com
 trigger_map:
 - pattern: 1.*
   is_pull_request_allowed: false
@@ -38,8 +37,6 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-
-            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
             ls -l ./android/app
     - script@1.1.1:
         title: install node
