@@ -58,8 +58,8 @@ import com.android.build.OutputFile
  * ]
  */
 
-apply from: "../../.nvm/versions/node/v6.3.1/lib/node_modules/react-native/react.gradle"
-apply from: "../../.nvm/versions/node/v6.3.1/lib/node_modules/react-native-code-push/android/codepush.gradle"
+apply from: "../../../../.nvm/versions/node/v6.3.1/lib/node_modules/react-native/react.gradle"
+apply from: "../../../../.nvm/versions/node/v6.3.1/lib/node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create three separate APKs instead of one:
