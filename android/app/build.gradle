@@ -118,22 +118,22 @@ android {
 
     signingConfigs {
         dev {
-            storeFile file("MyProject.signing" + ".keystore")
-            storePassword 'mypass'
-            keyAlias 'myalias'
-            keyPassword 'mykey'
+            storeFile file("../_tmp/android.keystore")
+            storePassword "bitrise-android-keystore-1234"
+            keyAlias "bitrise-android-test"
+            keyPassword "bitrise-android-keypass-1234"
         }
         staging {
-            storeFile file("MyProject.signing" + ".keystore")
-            storePassword 'mypass'
-            keyAlias 'myalias'
-            keyPassword 'mykey'
+            storeFile file("../_tmp/android.keystore")
+            storePassword "bitrise-android-keystore-1234"
+            keyAlias "bitrise-android-test"
+            keyPassword "bitrise-android-keypass-1234"
         }
         release {
-            storeFile file("MyProject.signing" + ".keystore")
-            storePassword 'mypass'
-            keyAlias 'myalias'
-            keyPassword 'mykey'
+            storeFile file("../_tmp/android.keystore")
+            storePassword "bitrise-android-keystore-1234"
+            keyAlias "bitrise-android-test"
+            keyPassword "bitrise-android-keypass-1234"
         }
     }
 
@@ -205,8 +205,7 @@ dependencies {
 
 
 //apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use
