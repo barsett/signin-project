@@ -118,22 +118,22 @@ android {
 
     signingConfigs {
         dev {
-            storeFile file(JRAPP_RELEASE_STORE_FILE)
-            storePassword JRAPP_RELEASE_STORE_PASSWORD
-            keyAlias JRAPP_RELEASE_KEY_ALIAS
-            keyPassword JRAPP_RELEASE_KEY_PASSWORD
+            storeFile file("../_tmp/android.keystore")
+            storePassword "bitrise-android-keystore-1234"
+            keyAlias "bitrise-android-test"
+            keyPassword "bitrise-android-keypass-1234"
         }
         staging {
-            storeFile file(JRAPP_RELEASE_STORE_FILE)
-            storePassword JRAPP_RELEASE_STORE_PASSWORD
-            keyAlias JRAPP_RELEASE_KEY_ALIAS
-            keyPassword JRAPP_RELEASE_KEY_PASSWORD
+            storeFile file("../_tmp/android.keystore")
+            storePassword "bitrise-android-keystore-1234"
+            keyAlias "bitrise-android-test"
+            keyPassword "bitrise-android-keypass-1234"
         }
         release {
-            storeFile file(JRAPP_RELEASE_STORE_FILE)
-            storePassword JRAPP_RELEASE_STORE_PASSWORD
-            keyAlias JRAPP_RELEASE_KEY_ALIAS
-            keyPassword JRAPP_RELEASE_KEY_PASSWORD
+            storeFile file("../_tmp/android.keystore")
+            storePassword "bitrise-android-keystore-1234"
+            keyAlias "bitrise-android-test"
+            keyPassword "bitrise-android-keypass-1234"
         }
     }
 
