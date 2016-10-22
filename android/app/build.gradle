@@ -205,7 +205,6 @@ dependencies {
 
 
 //apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
 // Run this once to be able to run the application with BUCK
