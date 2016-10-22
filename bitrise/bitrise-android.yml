@@ -203,6 +203,7 @@ workflows:
         - notify_email_list: "ayuz_dota@yahoo.com"
     before_run:
     after_run:
+    
   1.x-Prod:
     steps:
     - activate-ssh-key@3.1.1:
@@ -292,100 +293,6 @@ workflows:
             find . -name *.apk
 
             cp ./android/app/build/outputs/apk/app-release.apk  $BITRISE_DEPLOY_DIR/movis-prod.apk
-    - deploy-to-bitrise-io@1.2.5:
-        inputs:
-        - notify_email_list: "ayuz_dota@yahoo.com"
-    before_run:
-    after_run:
-  1.x-Staging:
-    steps:
-    - activate-ssh-key@3.1.1:
-        title: Activate App SSH key
-        inputs:
-        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
-    - git-clone@3.3.4: {}
-    - script@1.1.3:
-        title: copy production config
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            cp ./app/config/Config.prod.js ./app/config/Config.js
-            # cat ./app/config/Config.js
-    - script@1.1.3:
-        title: Get keystore
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/_tmp/android.keystore
-            ls -l ./android/app
-    - script@1.1.3:
-        title: install node
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-            apt-get install -y nodejs
-
-            node --version
-            npm --version
-
-            npm install npm -g
-            npm --version
-    - script@1.1.3:
-        title: npm install
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            npm install
-    - script@1.1.3:
-        title: npm test
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            npm test
-    - script@1.1.3:
-        title: install react native cli
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            npm install -g react-native-cli
-    - script@1.1.3:
-        title: bundle-android
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            react-native bundle --entry-file ./index.android.js --platform android --bundle-output android/app/src/main/assets/index.android.bundle --dev false --assets-dest ./android/app/src/main/res/
-    - script@1.1.3:
-        title: assembleStaging
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            cd android
-            echo ///////////////////////////////
-            echo $BITRISEIO_ANDROID_KEYSTORE_URL
-            echo $JRAPP_RELEASE_STORE_FILE
-            echo $BITRISEIO_ANDROID_KEYSTORE_ALIAS
-            echo $BITRISE_BUILD_NUMBER
-            echo ///////////////////////////////
-
-            ./gradlew -PJRAPP_RELEASE_STORE_FILE=$JRAPP_RELEASE_STORE_FILE -PJRAPP_RELEASE_KEY_ALIAS=$BITRISEIO_ANDROID_KEYSTORE_ALIAS -PJRAPP_RELEASE_STORE_PASSWORD=$BITRISEIO_ANDROID_KEYSTORE_PASSWORD -PJRAPP_RELEASE_KEY_PASSWORD=$BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD -PversionCode=$BITRISE_BUILD_NUMBER assembleStaging
-    - script@1.1.3:
-        title: cp apk
-        inputs:
-        - content: |-
-            #!/bin/bash
-
-            find . -name *.apk
-
-            cp ./android/app/build/outputs/apk/app-staging.apk  $BITRISE_DEPLOY_DIR/movis-staging.apk
     - deploy-to-bitrise-io@1.2.5:
         inputs:
         - notify_email_list: "ayuz_dota@yahoo.com"
