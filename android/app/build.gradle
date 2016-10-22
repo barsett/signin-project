@@ -123,12 +123,6 @@ android {
             keyAlias "bitrise-android-test"
             keyPassword "bitrise-android-keypass-1234"
         }
-        staging {
-            storeFile file("../_tmp/android.keystore")
-            storePassword "bitrise-android-keystore-1234"
-            keyAlias "bitrise-android-test"
-            keyPassword "bitrise-android-keypass-1234"
-        }
         release {
             storeFile file("../_tmp/android.keystore")
             storePassword "bitrise-android-keystore-1234"
@@ -146,12 +140,6 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
             buildConfigField "String", "CODEPUSH_KEY", '"4Lq9ZrNhIfTmNYkWcyJ0o7sbBfEeNJmQEL32l"'
-        }
-        staging {
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
-            buildConfigField "String", "CODEPUSH_KEY", '"aPIDhI5pJoF8EVCwl5HHH62t05eaNJmQEL32l"'
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
