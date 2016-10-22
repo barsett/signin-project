@@ -16,9 +16,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!-- for Push Notification -->
-    <permission android:name="com.jasaraharjamobileapp.permission.C2D_MESSAGE"
+    <permission android:name="com.signinmobileapp.permission.C2D_MESSAGE"
                      android:protectionLevel="signature" />
-    <uses-permission android:name="com.jasaraharjamobileapp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.signinmobileapp.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- not used
@@ -58,7 +58,7 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.jasaraharjamobileapp" />
+                <category android:name="com.signinmobileapp" />
             </intent-filter>
       </receiver>
       <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
