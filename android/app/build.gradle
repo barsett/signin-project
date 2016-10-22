@@ -133,19 +133,19 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "CODEPUSH_KEY", '"4Lq9ZrNhIfTmNYkWcyJ0o7sbBfEeNJmQEL32l"'
+            buildConfigField "String", "CODEPUSH_KEY", '"nFIWeXQYoow_NdeAmOCrPQ"'
         }
         dev {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
-            buildConfigField "String", "CODEPUSH_KEY", '"4Lq9ZrNhIfTmNYkWcyJ0o7sbBfEeNJmQEL32l"'
+            buildConfigField "String", "CODEPUSH_KEY", '"nFIWeXQYoow_NdeAmOCrPQ"'
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
-            buildConfigField "String", "CODEPUSH_KEY", '"5S9HZbdNCOc6RzD3k-JD-IBCWRcwNJmQEL32l"'
+            buildConfigField "String", "CODEPUSH_KEY", '"nFIWeXQYoow_NdeAmOCrPQ"'
         }
     }
     // applicationVariants are e.g. debug, release
