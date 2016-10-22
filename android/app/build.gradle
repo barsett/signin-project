@@ -98,7 +98,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.jasaraharjamobileapp"
+        applicationId "com.signinmobileapp"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode getAppVersionCode()
