@@ -2,16 +2,16 @@
   "project_info": {
     "project_id": "affable-operand-846",
     "project_number": "204281280864",
-    "name": "JasaRaharja"
+    "name": "SignIn"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:204281280864:android:5f6f3d833bcf10aa",
-        "client_id": "android:com.jasaraharjamobileapp",
+        "client_id": "android:com.signinmobileapp",
         "client_type": 1,
         "android_client_info": {
-          "package_name": "com.jasaraharjamobileapp",
+          "package_name": "com.signinmobileapp",
           "certificate_hash": []
         }
       },
