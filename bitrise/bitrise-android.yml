@@ -106,7 +106,7 @@ workflows:
             cp ./android/app/build/outputs/apk/app-dev.apk  $BITRISE_DEPLOY_DIR/movis.apk
     - deploy-to-bitrise-io@1.2.4:
         inputs:
-        - notify_email_list: "$JR_NOTIFY_EMAIL"
+        - notify_email_list: "ayuz_dota@yahoo.com"
     before_run:
     after_run:
   0.x:
@@ -200,7 +200,7 @@ workflows:
             cp ./android/app/build/outputs/apk/app-release.apk  $BITRISE_DEPLOY_DIR/movis.apk
     - deploy-to-bitrise-io@1.2.3:
         inputs:
-        - notify_email_list: "$JR_NOTIFY_EMAIL"
+        - notify_email_list: "ayuz_dota@yahoo.com"
     before_run:
     after_run:
   1.x-Prod:
@@ -294,7 +294,7 @@ workflows:
             cp ./android/app/build/outputs/apk/app-release.apk  $BITRISE_DEPLOY_DIR/movis-prod.apk
     - deploy-to-bitrise-io@1.2.5:
         inputs:
-        - notify_email_list: "$JR_NOTIFY_EMAIL"
+        - notify_email_list: "ayuz_dota@yahoo.com"
     before_run:
     after_run:
   1.x-Staging:
@@ -388,6 +388,6 @@ workflows:
             cp ./android/app/build/outputs/apk/app-staging.apk  $BITRISE_DEPLOY_DIR/movis-staging.apk
     - deploy-to-bitrise-io@1.2.5:
         inputs:
-        - notify_email_list: "$JR_NOTIFY_EMAIL"
+        - notify_email_list: "ayuz_dota@yahoo.com"
     before_run:
     after_run:
