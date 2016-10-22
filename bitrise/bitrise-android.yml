@@ -130,7 +130,7 @@ workflows:
         - content: |-
             #!/bin/bash
 
-            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/_tmp/android.keystore
             ls -l ./android/app
     - script@1.1.0:
         title: install node
@@ -224,7 +224,7 @@ workflows:
         - content: |-
             #!/bin/bash
 
-            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/_tmp/android.keystore
             ls -l ./android/app
     - script@1.1.3:
         title: install node
@@ -318,7 +318,7 @@ workflows:
         - content: |-
             #!/bin/bash
 
-            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/app/$JRAPP_RELEASE_STORE_FILE
+            curl $BITRISEIO_ANDROID_KEYSTORE_URL -o ./android/_tmp/android.keystore
             ls -l ./android/app
     - script@1.1.3:
         title: install node
