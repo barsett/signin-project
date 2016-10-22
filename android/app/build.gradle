@@ -118,22 +118,22 @@ android {
 
     signingConfigs {
         dev {
-            storeFile 'myfile'
-            storePassword 'mypass'
-            keyAlias 'myalias'
-            keyPassword 'mykey'
+            storeFile file(JRAPP_RELEASE_STORE_FILE)
+            storePassword JRAPP_RELEASE_STORE_PASSWORD
+            keyAlias JRAPP_RELEASE_KEY_ALIAS
+            keyPassword JRAPP_RELEASE_KEY_PASSWORD
         }
         staging {
-            storeFile 'myfile'
-            storePassword 'mypass'
-            keyAlias 'myalias'
-            keyPassword 'mykey'
+            storeFile file(JRAPP_RELEASE_STORE_FILE)
+            storePassword JRAPP_RELEASE_STORE_PASSWORD
+            keyAlias JRAPP_RELEASE_KEY_ALIAS
+            keyPassword JRAPP_RELEASE_KEY_PASSWORD
         }
         release {
-            storeFile 'myfile'
-            storePassword 'mypass'
-            keyAlias 'myalias'
-            keyPassword 'mykey'
+            storeFile file(JRAPP_RELEASE_STORE_FILE)
+            storePassword JRAPP_RELEASE_STORE_PASSWORD
+            keyAlias JRAPP_RELEASE_KEY_ALIAS
+            keyPassword JRAPP_RELEASE_KEY_PASSWORD
         }
     }
 
