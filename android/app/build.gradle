@@ -118,19 +118,19 @@ android {
 
     signingConfigs {
         dev {
-            storeFile file("MyProject.signing" + ".keystore")
+            storeFile 'myfile'
             storePassword 'mypass'
             keyAlias 'myalias'
             keyPassword 'mykey'
         }
         staging {
-            storeFile file("MyProject.signing" + ".keystore")
+            storeFile 'myfile'
             storePassword 'mypass'
             keyAlias 'myalias'
             keyPassword 'mykey'
         }
         release {
-            storeFile file("MyProject.signing" + ".keystore")
+            storeFile 'myfile'
             storePassword 'mypass'
             keyAlias 'myalias'
             keyPassword 'mykey'
