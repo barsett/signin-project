@@ -19,6 +19,7 @@ const i18n = new LocalizedStrings({
     documentList:"Document List",
     document:"Document",
     lakaSearch:"Search Laka",
+    inbox:"Inbox",
     lakaDetail:"Laka Detail",
     santunanSearch:"Search Claim",
     santunanDetail:"Claim Detail",
@@ -88,9 +89,20 @@ const i18n = new LocalizedStrings({
     pixelRatio: 'Pixel ratio',
     fontRatio: 'Font scale',
     screenSize: 'Screen size',
+    finance: 'Finance',
+    accounting: 'Accounting',
+    it: 'Informasi Teknologi',
+    design: 'Design',
+    mail: 'Mail',
+    education: 'Education',
+    transportation: 'Transportation',
+    onProgress: 'On Progress',
+    creativeIndustry: 'Creative Industry',
+    construction: 'Construction',
+    legal: 'Legal System'
   },
   id: {
-    home:"Beranda",
+    home:"Home",
     map:"Peta",
     setting:"Pengaturan",
     camera:"Kamera",
@@ -103,6 +115,7 @@ const i18n = new LocalizedStrings({
     // Add initial for Status Surveyor Action and Button
     statusSurveyor:"Status Surveyor",
     lakaSearch:"Cari Laka",
+    inbox:"Inbox",
     lakaDetail:"Detail Laka",
     santunanSearch:"Cari Santunan",
     santunanDetail:"Detail Santunan",
@@ -173,6 +186,17 @@ const i18n = new LocalizedStrings({
     pixelRatio: 'Rasio pixel',
     fontRatio: 'Skala huruf',
     screenSize: 'Ukuran layar',
+    finance: 'Finance',
+    accounting: 'Accounting',
+    it: 'Informasi Teknologi',
+    design: 'Design',
+    mail: 'Mail',
+    education: 'Education',
+    transportation: 'Transportation',
+    onProgress: 'On Progress',
+    creativeIndustry: 'Creative Industry',
+    construction: 'Construction',
+    legal: 'Legal System'
   }
 });
 

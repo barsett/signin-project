@@ -51,6 +51,7 @@ import AboutScreen from './screens/AboutScreen';
 import OverviewScreen from './screens/OverviewScreen';
 // Import Screen for StatusSurveyorScreen class
 import StatusSurveyorScreen from './screens/StatusSurveyorScreen';
+import OnprogressScreen from './screens/OnprogressScreen';
 
 // need to clean up
 import MapScreen from './screens/MapScreen';
@@ -303,6 +304,7 @@ export default class JasaRaharjaMobileApp extends Component {
                 <Route name='setting' component={UserIsAuthenticated(SettingScreen)} schema='main' title={i18n.setting} />
                 <Route name='iconDescription' component={UserIsAuthenticated(IconDescriptionScreen)} schema='sub' title={i18n.iconDescription} />
                 <Route name='about' component={UserIsAuthenticated(AboutScreen)} schema='sub' title={i18n.about} />
+                <Route name='onProgress' component={UserIsAuthenticated(OnprogressScreen)} schema='main' title={i18n.onProgress} />
 
               </Router>
             </SideDrawer>

@@ -13,8 +13,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <!-- for GPS -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- for Push Notification -->
     <permission android:name="com.signinmobileapp.permission.C2D_MESSAGE"
                      android:protectionLevel="signature" />
@@ -35,9 +34,6 @@
       <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyB6xxNfvvKN-vHJuG0TYlFlb1Ric3f07c0"/>
-      <meta-data
-        android:name="io.fabric.ApiKey"
-        android:value="69efd8f53c8f2faa625fe5867e5c928c8c6a02dd"/>
       <activity
         android:name=".MainActivity"
         android:theme="@style/SplashTheme"
@@ -62,7 +58,7 @@
             </intent-filter>
       </receiver>
       <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-      
+
       <service android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService"/>
       <service
             android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
@@ -72,8 +68,5 @@
             </intent-filter>
       </service>
       <!-- END for Push Notification -->
-
-
     </application>
-
 </manifest>

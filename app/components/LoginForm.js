@@ -74,6 +74,7 @@ class LoginForm extends React.Component {
 
   render() {
         var progress = (this.props.isLoading) ? <MKSpinner strokeColor='#ffffff' style={styles.spinner} spinnerAniDuration={500}/> : <Text style={localStyles.buttonText}>Log In</Text>;
+        var progress2 = <Text style={localStyles.buttonText}>Sign Up</Text>;
 
         return (
                 <View>
@@ -118,6 +119,16 @@ class LoginForm extends React.Component {
                     enabled={!this.props.isLoading}
                     >
                     {progress}
+                  </MKButton>
+                  <View style={localStyles.seperator}>
+                  </View>
+                  <MKButton
+                    onPress={this._register}
+                    style={localStyles.button}
+                    cornerRadius={21}
+                    enabled={!this.props.isLoading}
+                    >
+                    {progress2}
                   </MKButton>
                 </View>
         );

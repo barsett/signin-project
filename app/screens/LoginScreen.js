@@ -98,8 +98,9 @@ class LoginScreen extends React.Component {
   }
 
   render() {
-//        var progress = (this.props.isLoading) ? <Spinner styleAttr="Normal" /> : i18n.login;
+//      var progress = (this.props.isLoading) ? <Spinner styleAttr="Normal" /> : i18n.login;
         var progress = (this.props.isLoading) ? <MKSpinner strokeColor='#ff6600' style={styles.spinner} spinnerAniDuration={500}/> : <Icon style={styles.icon} color='white' name="sign-in" size={25}/>;
+        var progress2 = <Icon style={styles.icon} color='white' name="sign-up" size={25}/>;
 
         return (
             <Image
@@ -159,6 +160,18 @@ class LoginScreen extends React.Component {
                     >
                     {progress}
                   </MKButton>
+                  <View style={localStyles.seperator}>
+                  </View>
+                  <MKButton
+                    onPress={this._login}
+                    //shadowRadius={2}
+                    //shadowOffset={{width: 0, height: 2}}
+                    //shadowOpacity={.1}
+                    style={localStyles.button}
+                    cornerRadius={21}
+                    >
+                    {progress2}
+                  </MKButton>
 
                 </View>
                 <View style={localStyles.footer}>
@@ -199,9 +212,7 @@ const localStyles = StyleSheet.create({
   },
   logo: {
 		alignSelf: 'center',
-		width: 150 ,
-		height: 150 ,
-		//resizeMode: 'stretch'
+		resizeMode: 'contain'
 	},
   username: {
     paddingLeft: 15,

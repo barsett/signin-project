@@ -29,7 +29,7 @@ class HomeScreen extends React.Component {
     this.props.updateReferenceData();
   }
 
-  _getMenuSurveyor(){
+  /*_getMenuSurveyor(){
       return (
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.task} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
@@ -83,7 +83,7 @@ class HomeScreen extends React.Component {
       return this._getMenuSurveyor();
     }
   }
-
+*/
   render() {
 
       var content = <ScrollView style={localStyles.bg}>
@@ -92,43 +92,79 @@ class HomeScreen extends React.Component {
                           <Text style={localStyles.nameHeader}>
                             {this.props.fullname}
                           </Text>
-                          <Text style={localStyles.descHeader}>
-                            {this.props.roles}
-                          </Text>
-                          <Text style={localStyles.descHeader}>
-                            {this.props.namaKantor}
-                          </Text>
                         </View>
                       </View>
                       <View style={{padding: getCorrectShapeSizeForScreen(8)}}>
                         <SurveyStatisticCard/>
                         <View style={localStyles.menuRow}>
-                          {this._getMenu()}
                           <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.lakaSearch} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
                               <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text-o" />
-                                <Text style={localStyles.buttonText}> {i18n.lakaSearch} </Text>
+                                <Icon style={localStyles.buttonIcon} name="inbox" />
+                                <Text style={localStyles.buttonText}> {i18n.mail} </Text>
                               </View>
                             </Button>
                           </View>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.santunanSearch} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.santunanSearch} </Text>
-                              </View>
-                            </Button>
-                          </View>
-
-                        </View>
-                        <View style={localStyles.menuRow}>
-                          {this._getMenuStatus()}
                           <View style={localStyles.buttonContainer}>
                             <Button onPress={Actions.setting} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
                               <View style={{flexDirection: 'column', flex: 1}}>
                                 <Icon style={localStyles.buttonIcon} name="gear" />
                                 <Text style={localStyles.buttonText}> {i18n.setting} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                        </View>
+                        <View style={localStyles.separator}>
+                        </View>
+                        <Text style={localStyles.text1}>Category : </Text>
+                        <View style={localStyles.menuRow}>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="file-text" />
+                                <Text style={localStyles.buttonText}> {i18n.construction} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="file-text" />
+                                <Text style={localStyles.buttonText}> {i18n.creativeIndustry} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="file-text" />
+                                <Text style={localStyles.buttonText}> {i18n.design} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                        </View>
+                        <View style={localStyles.menuRow}>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="file-text" />
+                                <Text style={localStyles.buttonText}> {i18n.finance} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="file-text" />
+                                <Text style={localStyles.buttonText}> {i18n.it} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="file-text" />
+                                <Text style={localStyles.buttonText}> {i18n.legal} </Text>
                               </View>
                             </Button>
                           </View>
@@ -207,7 +243,7 @@ const localStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: getCorrectShapeSizeForScreen(20),
-    height: height/3.45,
+    height: height/5,
   },
   headerContent:{
     flex: 1,
@@ -234,6 +270,14 @@ const localStyles = StyleSheet.create({
     borderRadius: getCorrectShapeSizeForScreen(50)/2,
     backgroundColor: 'white',
     marginBottom: getCorrectShapeSizeForScreen(10),
+  },
+  separator:{
+    height: getCorrectShapeSizeForScreen(30),
+  },
+  text1:{
+    color: '#24abe2',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
 

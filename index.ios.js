@@ -11,8 +11,8 @@ import {
   View
 } from 'react-native';
 
-import crashlytics from 'react-native-fabric-crashlytics';
-crashlytics.init();
+//import crashlytics from 'react-native-fabric-crashlytics';
+//crashlytics.init();
 
 
 import JasaRaharjaMobileApp from './app/Root';

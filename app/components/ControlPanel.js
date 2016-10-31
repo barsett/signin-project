@@ -77,7 +77,6 @@ class ControlPanel extends React.Component{
             </TouchableHighlight>
           </View>
         );
-
     }
 
     _getCommonMenu(){
@@ -86,19 +85,10 @@ class ControlPanel extends React.Component{
           <TouchableHighlight
               style={localStyles.menu}
               underlayColor="#e5e5e5"
-              onPress={() => this._selectMenu(Actions.lakaSearch)}>
+              onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row}>
-                <Icon style={localStyles.icon} name="file-text-o"/>
-                <Text style={localStyles.text}> {i18n.lakaSearch} </Text>
-              </View>
-          </TouchableHighlight>
-          <TouchableHighlight
-              style={localStyles.menu}
-              underlayColor="#e5e5e5"
-              onPress={() => this._selectMenu(Actions.santunanSearch)}>
-              <View style={localStyles.row}>
-                <Icon style={localStyles.icon} name="file-text"/>
-                <Text style={localStyles.text}> {i18n.santunanSearch} </Text>
+                <Icon style={localStyles.icon} name="inbox"/>
+                <Text style={localStyles.text}> {i18n.mail} </Text>
               </View>
           </TouchableHighlight>
           <TouchableHighlight
@@ -108,6 +98,60 @@ class ControlPanel extends React.Component{
               <View style={localStyles.row}>
                 <Icon style={localStyles.icon} name="gear"/>
                 <Text style={localStyles.text}> {i18n.setting} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row2}>
+                <Icon style={localStyles.icon} name="file-text"/>
+                <Text style={localStyles.text}> {i18n.construction} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row2}>
+                <Icon style={localStyles.icon} name="file-text"/>
+                <Text style={localStyles.text}> {i18n.creativeIndustry} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row2}>
+                <Icon style={localStyles.icon} name="file-text"/>
+                <Text style={localStyles.text}> {i18n.design} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row2}>
+                <Icon style={localStyles.icon} name="file-text"/>
+                <Text style={localStyles.text}> {i18n.finance} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row2}>
+                <Icon style={localStyles.icon} name="file-text"/>
+                <Text style={localStyles.text}> {i18n.it} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row2}>
+                <Icon style={localStyles.icon} name="file-text"/>
+                <Text style={localStyles.text}> {i18n.legal} </Text>
               </View>
           </TouchableHighlight>
           <TouchableHighlight
@@ -171,7 +215,6 @@ class ControlPanel extends React.Component{
                             </View>*/}
                           <View style={localStyles.headerTextWrap}>
                               <Text style={localStyles.headerText} >{this.props.currentUser}</Text>
-                              <Text style={localStyles.headerTextChild} >{this.props.currentKantor}</Text>
                           </View>
                         </View>
                 </Image>
@@ -193,6 +236,7 @@ class ControlPanel extends React.Component{
           </ScrollView>
         )
     }
+
 }
 
 ControlPanel.contextTypes = {
@@ -278,6 +322,12 @@ const localStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 10,
+  },
+  row2: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 20,
   },
   separator: {
     height: 2,

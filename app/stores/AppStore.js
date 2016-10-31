@@ -86,8 +86,8 @@ const fabricLogger = store => next => action => {
 
     case types.AUTH_SET_TOKEN:
       Answers.logLogin(action.username, true);
-      Crashlytics.setUserName(action.username);
-      Crashlytics.setString('organization', 'Jasa Raharja');
+      //Crashlytics.setUserName(action.username);
+      //Crashlytics.setString('organization', 'Jasa Raharja');
     break;
 
     case types.AUTH_LOGIN_ERROR:

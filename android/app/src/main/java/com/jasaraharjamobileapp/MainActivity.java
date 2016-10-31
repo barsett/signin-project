@@ -19,6 +19,9 @@ import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.smixx.fabric.FabricPackage;
 import io.fabric.sdk.android.Fabric;
+//import com.magus.fblogin.FacebookLoginPackage;
+//import com.facebook.FacebookSdk;
+//import com.facebook.appevents.AppEventsLogger;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,6 +71,7 @@ public class MainActivity extends ReactActivity {
         new VectorIconsPackage(),
         new ReactMaterialKitPackage(),
         new ReactNativeLocalizationPackage(),
+        //new MapsPackage(this),
         //new AirPackage(this),
         new ImagePickerPackage(),
         //new RCTSplashScreenPackage(this),
@@ -102,5 +106,13 @@ public class MainActivity extends ReactActivity {
     protected String getJSBundleFile() {
         return CodePush.getBundleUrl();
     }
+
+    /*@Override
+    protected List<ReactPackage> getPackages() {
+        return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new FacebookLoginPackage() // <------ add the package
+        );
+    }*/
 
 }
