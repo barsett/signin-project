@@ -66,7 +66,7 @@ export default class Intro extends React.Component {
         </View>
       </View>
 
-      <View style={[styles.slide, { backgroundColor: '#0087cd' }]}>
+      <View style={[styles.slide, { backgroundColor: '#0f75bcff' }]}>
         <View style={styles.info}>
           <View><Text style={styles.title}>LOGIN</Text></View>
           <View><Text style={styles.description}>For using this application please register first</Text></View>
@@ -78,7 +78,7 @@ export default class Intro extends React.Component {
         </View>
       </View>
 
-      <View style={[styles.slide, { backgroundColor: '#0087cd' }]}>
+      <View style={[styles.slide, { backgroundColor: '#0f75bcff' }]}>
         <View style={styles.info}>
           <View><Text style={styles.title}>EMAIL</Text></View>
           <View><Text style={styles.description}>Sign In will serve as your personal email</Text></View>
@@ -90,7 +90,7 @@ export default class Intro extends React.Component {
         </View>
       </View>
 
-      <View style={[styles.slide, { backgroundColor: '#0087cd' }]}>
+      <View style={[styles.slide, { backgroundColor: '#0f75bcff' }]}>
         <View style={styles.info}>
           <View><Text style={styles.title2}>Apps Ready!</Text></View>
           <View><Text style={styles.description}><Text style={styles.boldItalic}>SIGN IN</Text>  <Text style={styles.italic}>Mobile Application</Text> have been installed and ready to use</Text></View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
+    backgroundColor: '#0f75bcff',
     padding: 15,
   },
   header: {

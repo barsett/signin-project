@@ -20,6 +20,7 @@ import dismissKeyboard from 'dismissKeyboard';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CodePush from "react-native-code-push";
+import CheckBox from 'react-native-checkbox';
 
 import { MKButton, MKSpinner, MKTextField, MKColor } from 'react-native-material-kit';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -74,6 +75,8 @@ class LoginScreen extends React.Component {
     console.log("Receiving isLoggedIn ", nextProps.isLoggedIn);
     console.log("Receiving isFreshInstall: ", nextProps.isFreshInstall);
     console.log("Receiving storageLoaded: ", nextProps.storageLoaded);
+    this.props = nextProps;
+    this.setState({ checked: nextProps.checked});
 
     if (nextProps.isLoggedIn) {
       Actions.main();
@@ -106,37 +109,14 @@ class LoginScreen extends React.Component {
             <Image
               source={require('../img/login.png')}
               style={localStyles.bgImage}>
+              <View style={localStyles.login}>
+                <View  style={localStyles.titlecontainer}>
+                  <Image source={require('../img/logo.png')}
+                  style={localStyles.logo}/>
+                </View>
+              </View>
               <View style={localStyles.basicContainer}>
                 <View style={localStyles.login}>
-                  <View  style={localStyles.titlecontainer}>
-                    <Image source={require('../img/logo.png')}
-                    style={localStyles.logo}/>
-
-                    {/*<Text style={localStyles.title}>
-                      Mobile Application
-                    </Text>}
-                  </View>
-                  <View style={localStyles.borderUsername}>
-                    <TextInput
-                      ref="username"
-                      style={localStyles.textInput}
-                      placeholder={'Username'}
-                      autoCorrect={false}
-                      //autoFocus={true}
-                      underlineColorAndroid='rgba(0,0,0,0)'
-                      onChangeText={text => this.setState({'username': text })}
-                      onSubmitEditing={() => this.refs.password.focus()}
-                      placeholderTextColor={'#393939'} />
-
-                      {/*<MKTextField
-                        floatingLabelEnable={true}
-                        //floatingLabelFont='Roboto'
-                        tintColor={MKColor.Lime}
-                        textInputStyle={{color: MKColor.Orange}}
-                        placeholder='Username'
-                        style={{height: 48, marginTop: 10,}}
-                      />*/}
-                  </View>
                   <View style={localStyles.borderPassword}>
                     <TextInput
                       ref="password"
@@ -184,9 +164,10 @@ class LoginScreen extends React.Component {
     }
 }
 
+
 const localStyles = StyleSheet.create({
 	bg : {
-    backgroundColor: '#24abe2',
+    backgroundColor: '#0f75bcff',
 		flex: 1,
     flexDirection: 'row',
 		justifyContent: 'center',
@@ -194,12 +175,12 @@ const localStyles = StyleSheet.create({
 	},
   bgImage: {
     flex: 1,
-    backgroundColor: '#24abe2',
+    backgroundColor: '#0f75bcff',
     justifyContent: 'center',
     //resizeMode: 'stretch', // or 'stretch'
     alignItems: 'center',
-    width: null,
-    height: null,
+    //width,
+    //height: null,
   },
   basicContainer: {
     backgroundColor: 'transparent',
@@ -208,11 +189,10 @@ const localStyles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     padding: 0,
-    width: width > 400 ? 400 : width,
+    //width: width > 400 ? 400 : width,
   },
   logo: {
 		alignSelf: 'center',
-		resizeMode: 'contain'
 	},
   username: {
     paddingLeft: 15,

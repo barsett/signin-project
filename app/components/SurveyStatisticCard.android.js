@@ -23,7 +23,7 @@ export default class BannerScreen extends React.Component {
   render() {
     return (
       <View>
-        <Swiper style={styles.wrapper} height={120} showsButtons={false} autoplayTimeout={10} autoplay>
+        <Swiper style={styles.wrapper} height={120} showsButtons={false} autoplayTimeout={4} autoplay>
           <View style={styles.slide1}>
             <Image style={styles.image} source={require('../img/orca.png')} />
           </View>

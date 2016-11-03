@@ -181,7 +181,7 @@ const i18n = new LocalizedStrings({
     language: 'Bahasa',
     appLang: 'Bahasa Indonesia',
     logoutMsgTitle: 'Log out',
-    logoutMsg: 'Perangkat ini tidak akan menerima notifikasi jika log out dari aplikasi. Apakah anda yakin?',
+    logoutMsg: 'This device will not receive any notifications when logged out from the app. Are you sure?',
     emptyField: 'Semua field harus diisi',
     pixelRatio: 'Rasio pixel',
     fontRatio: 'Skala huruf',

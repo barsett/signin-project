@@ -41,42 +41,11 @@ class ControlPanel extends React.Component{
     }
 
     _getSurveyorMenu(){
-        return (
-          <TouchableHighlight
-                style={localStyles.menu}
-                underlayColor="#e5e5e5"
-                onPress={() => this._selectMenu(Actions.task)}>
-                <View style={localStyles.row}>
-                  <Icon style={localStyles.icon} name="list-alt"/>
-                  <Text style={localStyles.text}> {i18n.taskList} </Text>
-                </View>
-          </TouchableHighlight>
-        );
+        
     }
 
     _getOtorisatorMenu(){
-        return (
-          <View>
-            <TouchableHighlight
-                style={localStyles.menu}
-                underlayColor="#e5e5e5"
-                onPress={() => this._selectMenu(Actions.approvalList)}>
-                <View style={localStyles.row}>
-                  <Icon style={localStyles.icon} name="check"/>
-                  <Text style={localStyles.text}> {i18n.approvalList} </Text>
-                </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style={localStyles.menu}
-                underlayColor="#e5e5e5"
-                onPress={() => this._selectMenu(Actions.statusSurveyor)}>
-                <View style={localStyles.row}>
-                  <Icon style={localStyles.icon} name="user"/>
-                  <Text style={localStyles.text}> {i18n.statusSurveyor} </Text>
-                </View>
-            </TouchableHighlight>
-          </View>
-        );
+
     }
 
     _getCommonMenu(){
@@ -284,7 +253,7 @@ const localStyles = StyleSheet.create({
     marginRight: getCorrectShapeSizeForScreen(15),
   },
   header: {
-    backgroundColor: '#0087cd',
+    backgroundColor: '#0f75bcff',
     height: height/2.82,
   },
   headerTextWrap: {

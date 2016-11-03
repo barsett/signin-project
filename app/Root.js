@@ -329,7 +329,7 @@ const localStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#5aa0cc',
+    backgroundColor: '#0f75bcff',
     borderBottomColor: 'transparent',
     //borderBottomWidth: 64
   },

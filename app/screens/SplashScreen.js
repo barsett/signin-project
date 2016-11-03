@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   basicContainer: {
     flex:1,
-    backgroundColor: '#0087cd',
+    backgroundColor: '#0f75bcff',
     // flex: 1,
     flexDirection:'column',
     alignItems:'center',

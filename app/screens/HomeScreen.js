@@ -1,11 +1,14 @@
 /* @flow */
 'use strict'
-import React, { Component } from 'react';
+import React, { Component, PropTypes} from 'react';
 import {
     ScrollView,
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    TouchableHighlight,
+    Switch,
+    Alert,
 } from  'react-native';
 
 
@@ -14,6 +17,7 @@ import { connect } from 'react-redux';
 import Button from 'react-native-button';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
+import CheckBox from 'react-native-checkbox';
 
 import styles from '../styles/style';
 import i18n from '../i18n.js';
@@ -23,69 +27,104 @@ import SurveyStatisticCard from '../components/SurveyStatisticCard';
 
 
 class HomeScreen extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      isChecked: false,
+    };
+  }
   componentDidMount(){
     console.log("Updating Reference Data");
     this.props.updateReferenceData();
   }
-
-  /*_getMenuSurveyor(){
-      return (
+  state = {
+    trueSwitchIsOn: true,
+    falseSwitchIsOn: false,
+  };
+    _getMenuCategory1(){
+    return(
+      <View style={localStyles.menuRow}>
         <View style={localStyles.buttonContainer}>
-          <Button onPress={Actions.task} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+          <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="list-alt" />
-              <Text style={localStyles.buttonText}>{ i18n.taskList }</Text>
+              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Text style={localStyles.buttonText}> {i18n.construction} </Text>
             </View>
           </Button>
         </View>
-      );
-  }
-
-  _getMenuOtorisasi(){
-      return (
         <View style={localStyles.buttonContainer}>
-          <Button onPress={Actions.approvalList} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+          <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="medkit" />
-              <Text style={localStyles.buttonText}> {i18n.approvalList} </Text>
+              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Text style={localStyles.buttonText}> {i18n.creativeIndustry} </Text>
             </View>
           </Button>
         </View>
-      );
-  }
-
-  _getSurveyStatus(){
-    return (
-      <View style={localStyles.buttonContainer}>
-        <Button onPress={Actions.statusSurveyor} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-          <View style={{flexDirection: 'column', flex: 1}}>
-            <Icon style={localStyles.buttonIcon} name="user" />
-            <Text style={localStyles.buttonText}> {i18n.statusSurveyor} </Text>
-          </View>
-        </Button>
+        <View style={localStyles.buttonContainer}>
+          <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+            <View style={{flexDirection: 'column', flex: 1}}>
+              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Text style={localStyles.buttonText}> {i18n.design} </Text>
+            </View>
+          </Button>
+        </View>
       </View>
     );
   }
-
-  _getMenuStatus(){
-    if ( this.props.roles==="OTORISATOR" ){
-      return this._getSurveyStatus();
-    } else {
-      return ;
-    }
+  _getMenuCategory2(){
+    return(
+      <View style={localStyles.menuRow}>
+        <View style={localStyles.buttonContainer}>
+          <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+            <View style={{flexDirection: 'column', flex: 1}}>
+              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Text style={localStyles.buttonText}> {i18n.finance} </Text>
+            </View>
+          </Button>
+        </View>
+        <View style={localStyles.buttonContainer}>
+          <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+            <View style={{flexDirection: 'column', flex: 1}}>
+              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Text style={localStyles.buttonText}> {i18n.it} </Text>
+            </View>
+          </Button>
+        </View>
+        <View style={localStyles.buttonContainer}>
+          <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+            <View style={{flexDirection: 'column', flex: 1}}>
+              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Text style={localStyles.buttonText}> {i18n.legal} </Text>
+            </View>
+          </Button>
+        </View>
+      </View>
+    );
+  }
+  _logout(){
+    //console.log("### LOGOUT ###");
+    Alert.alert(
+      i18n.logoutMsgTitle,
+      i18n.logoutMsg,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log("Log out through action");
+            Actions.splash({logout: true});
+          }
+        },
+        {
+          text: 'Cancel',
+          onPress: () => {
+            console.log("Cancel log out");
+          }
+        }
+      ]
+    );
   }
 
-  _getMenu(){
-    if ( this.props.roles==="OTORISATOR" ){
-      return this._getMenuOtorisasi();
-    } else {
-      return this._getMenuSurveyor();
-    }
-  }
-*/
   render() {
-
       var content = <ScrollView style={localStyles.bg}>
                       <View style={localStyles.header}>
                         <View style={localStyles.headerContent}>
@@ -113,98 +152,32 @@ class HomeScreen extends React.Component {
                               </View>
                             </Button>
                           </View>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={() => this._logout()} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="power-off" />
+                                <Text style={localStyles.buttonText}> {i18n.logout} </Text>
+                              </View>
+                            </Button>
+                          </View>
                         </View>
                         <View style={localStyles.separator}>
                         </View>
-                        <Text style={localStyles.text1}>Category : </Text>
                         <View style={localStyles.menuRow}>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.construction} </Text>
-                              </View>
-                            </Button>
-                          </View>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.creativeIndustry} </Text>
-                              </View>
-                            </Button>
-                          </View>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.design} </Text>
-                              </View>
-                            </Button>
-                          </View>
+                          <Text style={localStyles.text1}>Job Listing </Text>
+                          <Switch
+                          onValueChange={(value) =>this.setState({falseSwitchIsOn: value})}
+                          value={this.state.falseSwitchIsOn} />
                         </View>
-                        <View style={localStyles.menuRow}>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.finance} </Text>
-                              </View>
-                            </Button>
-                          </View>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.it} </Text>
-                              </View>
-                            </Button>
-                          </View>
-                          <View style={localStyles.buttonContainer}>
-                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
-                              <View style={{flexDirection: 'column', flex: 1}}>
-                                <Icon style={localStyles.buttonIcon} name="file-text" />
-                                <Text style={localStyles.buttonText}> {i18n.legal} </Text>
-                              </View>
-                            </Button>
-                          </View>
+                        <View style={localStyles.separator}>
                         </View>
+                        {this.state.falseSwitchIsOn ? this._getMenuCategory1() : this._getMenuCategory1().hide}
+                        {this.state.falseSwitchIsOn ? this._getMenuCategory2() : this._getMenuCategory2().hide}
                       </View>
-
-                      {/* requested to be removed by JR 12/7/201  6
-                        <View style={localStyles.buttonContainer}>
-                        <Button onPress={() => Actions.splash({logout: true})} style={localStyles.buttonLogoutText} containerStyle={localStyles.buttonLogout}>
-                          <Icon style={localStyles.buttonLogoutIcon} name="power-off" />
-                          <Text style={localStyles.buttonLogoutText}> {i18n.logout} </Text>
-                        </Button>
-                      </View>*/}
-
-
                     </ScrollView>
-
       return content;
-
-      /*
-      return (
-	     	<View style={styles.bg}>
-	     		<Text style={localStyles.welcome}>
-	     			Hey There! Welcome, {this.props.roles}
-	 			  </Text>
-          <Button onPress={Actions.home} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.home} </Button>
-          <Button onPress={Actions.task} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.taskList} </Button>
-          <Button onPress={Actions.approvalList} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.approvalList} </Button>
-          // Add Button for Status Surveyor in Beranda
-          <Button onPress={Actions.statusSurveyor} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.statusSurveyor} </Button>
-          <Button onPress={Actions.setting} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.setting} </Button>
-          <Button onPress={Actions.lakaSearch} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.lakaSearch} </Button>
-          <Button onPress={Actions.camera} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.camera} </Button>
-          <Button onPress={Actions.logout} style={styles.buttonText} containerStyle={styles.buttonRounded}> {i18n.logout} </Button>
-	      </View>
-	    );
-      */
   }
 }
-
 
 const localStyles = StyleSheet.create({
   bg: {
@@ -228,18 +201,18 @@ const localStyles = StyleSheet.create({
     paddingBottom: getCorrectShapeSizeForScreen(20),
   },
   buttonIcon: {
-    color: '#24abe2',
+    color: '#0f75bcff',
     fontSize: getCorrectFontSizeForScreen(40),
     alignSelf: 'center',
     marginBottom: getCorrectFontSizeForScreen(5),
   },
   buttonText: {
-    color: '#464646',
+    color: '#0f75bcff',
     fontFamily: 'Roboto',
     fontSize: getCorrectFontSizeForScreen(12),
   },
   header:{
-    backgroundColor: '#0087cd',
+    backgroundColor: '#0f75bcff',
     flex: 1,
     flexDirection: 'row',
     padding: getCorrectShapeSizeForScreen(20),
@@ -275,7 +248,7 @@ const localStyles = StyleSheet.create({
     height: getCorrectShapeSizeForScreen(30),
   },
   text1:{
-    color: '#24abe2',
+    color: '#0f75bcff',
     fontSize: 20,
     fontWeight: 'bold',
   },
