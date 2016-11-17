@@ -179,9 +179,7 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:8.4.0"
     compile "com.google.android.gms:play-services-measurement:8.4.0"
     compile "com.android.support:appcompat-v7:23.0.1"
-    //compile project(':react-native-facebook-login')
-    //compile 'com.facebook.android:facebook-android-sdk:4.+'
-    //compile 'com.airbnb.android:react-native-maps:0.7.1'
+    compile project(':RNWebIntent')
 
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
       transitive = true;
@@ -193,10 +191,6 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
   }
 }
-
-
-//apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.github.dcendents.android-maven'
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use

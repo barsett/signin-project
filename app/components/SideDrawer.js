@@ -1,11 +1,17 @@
 'use strict';
 
-import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { Platform,
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  Switch,
+  Alert, } from 'react-native';
 
 import Drawer from 'react-native-drawer';
 import ControlPanel from './ControlPanel.js';
-// var ToolbarAndroid = require('ToolbarAndroid');
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Actions } from 'react-native-router-flux';
@@ -16,9 +22,7 @@ import { getCorrectFontSizeForScreen, getCorrectShapeSizeForScreen } from '../ap
 import TextAreaInputModal from '../components/TextAreaInputModal';
 import LookupReferenceModal from '../components/LookupReferenceModal';
 import LegendModal from '../components/LegendModal';
-
-
-
+import i18n from '../i18n.js';
 
 const enablePan = Platform.OS === 'ios';
 console.log("EnablePan: " + enablePan);
@@ -35,7 +39,28 @@ class SideDrawer extends Component {
   _closeControlPanel(){
       this.refs.drawer.close();
   }
-
+  _logout(){
+    //console.log("### LOGOUT ###");
+    Alert.alert(
+      i18n.logoutMsgTitle,
+      i18n.logoutMsg,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log("Log out through action");
+            Actions.splash({logout: true});
+          }
+        },
+        {
+          text: 'Cancel',
+          onPress: () => {
+            console.log("Cancel log out");
+          }
+        }
+      ]
+    );
+  }
   _openControlPanel(){
       this.refs.drawer.open();
   }
@@ -62,13 +87,31 @@ class SideDrawer extends Component {
 
   _getMenuIcons(){
     return [
-        {title: 'Menu', iconName: "th-list", iconSize: getCorrectFontSizeForScreen(24), show: 'always'}
+        {title: 'Menu', iconName: "power-off", iconSize: getCorrectFontSizeForScreen(24), show: 'always'}
     ];
   }
 
   _getMenuActions(){
     // to be implemented based on screen/route
-    this.refs.legendModal.openFromRoot("Legenda");
+    Alert.alert(
+      i18n.logoutMsgTitle,
+      i18n.logoutMsg,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log("Log out through action");
+            Actions.splash({logout: true});
+          }
+        },
+        {
+          text: 'Cancel',
+          onPress: () => {
+            console.log("Cancel log out");
+          }
+        }
+      ]
+    );
   }
 
   _openModal(name){
@@ -151,7 +194,7 @@ const drawerStyles = {
 
   toolbar: {
     height: 59,
-    backgroundColor: '#0087cd'
+    backgroundColor: '#0f75bcff'
   },
 
 }

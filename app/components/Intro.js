@@ -54,7 +54,7 @@ export default class Intro extends React.Component {
         activeDotColor={'#fff'}
       >
 
-      <View style={[styles.slide,{ backgroundColor: '#0087cd' }]}>
+      <View style={[styles.slide,{ backgroundColor: '#0f75bcff' }]}>
         <View style={styles.info}>
           <View><Text style={styles.title}>SIGN IN</Text></View>
           <View><Text style={styles.description}>Welcome to <Text style={styles.boldItalic}>SIGN IN</Text> is a <Text style={styles.italic}>Mobile Application</Text> for managing your professional account</Text></View>

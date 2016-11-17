@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "babel-eslint": "^7.0.0",
     "base-64": "^0.1.0",
     "events": "^1.1.0",
     "hoist-non-react-statics": "^1.2.0",
@@ -41,6 +42,7 @@
     "react-native-router-flux": "git+https://github.com/doddys/react-native-router-flux.git#2.x",
     "react-native-scrollable-tab-view": "0.5.3",
     "react-native-vector-icons": "^2.0.3",
+    "react-native-webintent": "^1.0.4",
     "react-redux": "^4.4.1",
     "realm": "^0.14.1",
     "redux": "^3.3.1",
@@ -52,11 +54,10 @@
     "redux-storage-engine-reactnativeasyncstorage": "^1.0.0",
     "redux-storage-merger-immutablejs": "^1.0.1",
     "redux-thunk": "^1.0.3",
-    "tcomb-form-native": "0.6.1",
-    "babel-eslint": "^7.0.0",
     "rimraf": "^2.5.4",
     "snazzy": "^5.0.0",
     "standard": "^8.4.0",
+    "tcomb-form-native": "0.6.1",
     "updtr": "^0.2.1"
   }
 }

@@ -12,6 +12,7 @@ import {
     Alert,
 } from 'react-native';
 
+var WebIntent = require('react-native-webintent');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var Actions = require('react-native-router-flux').Actions;
 var curDate = new Date();
@@ -41,7 +42,7 @@ class ControlPanel extends React.Component{
     }
 
     _getSurveyorMenu(){
-        
+
     }
 
     _getOtorisatorMenu(){
@@ -63,6 +64,15 @@ class ControlPanel extends React.Component{
           <TouchableHighlight
               style={localStyles.menu}
               underlayColor="#e5e5e5"
+              onPress={() => this._selectMenu(Actions.onProgress)}>
+              <View style={localStyles.row}>
+                <Icon style={localStyles.icon} name="cloud-download"/>
+                <Text style={localStyles.text}> {i18n.cloud} </Text>
+              </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+              style={localStyles.menu}
+              underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.setting)}>
               <View style={localStyles.row}>
                 <Icon style={localStyles.icon} name="gear"/>
@@ -74,7 +84,7 @@ class ControlPanel extends React.Component{
               underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row2}>
-                <Icon style={localStyles.icon} name="file-text"/>
+                <Icon style={localStyles.icon} name="group"/>
                 <Text style={localStyles.text}> {i18n.construction} </Text>
               </View>
           </TouchableHighlight>
@@ -83,7 +93,7 @@ class ControlPanel extends React.Component{
               underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row2}>
-                <Icon style={localStyles.icon} name="file-text"/>
+                <Icon style={localStyles.icon} name="lightbulb-o"/>
                 <Text style={localStyles.text}> {i18n.creativeIndustry} </Text>
               </View>
           </TouchableHighlight>
@@ -92,7 +102,7 @@ class ControlPanel extends React.Component{
               underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row2}>
-                <Icon style={localStyles.icon} name="file-text"/>
+                <Icon style={localStyles.icon} name="paint-brush"/>
                 <Text style={localStyles.text}> {i18n.design} </Text>
               </View>
           </TouchableHighlight>
@@ -101,7 +111,7 @@ class ControlPanel extends React.Component{
               underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row2}>
-                <Icon style={localStyles.icon} name="file-text"/>
+                <Icon style={localStyles.icon} name="money"/>
                 <Text style={localStyles.text}> {i18n.finance} </Text>
               </View>
           </TouchableHighlight>
@@ -110,7 +120,7 @@ class ControlPanel extends React.Component{
               underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row2}>
-                <Icon style={localStyles.icon} name="file-text"/>
+                <Icon style={localStyles.icon} name="database"/>
                 <Text style={localStyles.text}> {i18n.it} </Text>
               </View>
           </TouchableHighlight>
@@ -119,7 +129,7 @@ class ControlPanel extends React.Component{
               underlayColor="#e5e5e5"
               onPress={() => this._selectMenu(Actions.onProgress)}>
               <View style={localStyles.row2}>
-                <Icon style={localStyles.icon} name="file-text"/>
+                <Icon style={localStyles.icon} name="legal"/>
                 <Text style={localStyles.text}> {i18n.legal} </Text>
               </View>
           </TouchableHighlight>

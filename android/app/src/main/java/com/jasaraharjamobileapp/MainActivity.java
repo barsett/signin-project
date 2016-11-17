@@ -19,9 +19,7 @@ import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.smixx.fabric.FabricPackage;
 import io.fabric.sdk.android.Fabric;
-//import com.magus.fblogin.FacebookLoginPackage;
-//import com.facebook.FacebookSdk;
-//import com.facebook.appevents.AppEventsLogger;
+import com.ivanph.webintent.RNWebIntentPackage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,25 +38,13 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "JasaRaharjaMobileApp";
     }
-
-    /**
-     * Returns whether dev mode should be enabled.
-     * This enables e.g. the dev menu.
-     */
     @Override
     protected boolean getUseDeveloperSupport() {
         return BuildConfig.DEBUG;
     }
-
-   /**
-   * A list of packages used by the app. If the app uses additional views
-   * or modules besides the default ones, add more packages here.
-   */
     @Override
     protected List<ReactPackage> getPackages() {
       mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
-
-
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
         new RealmReactPackage(),
@@ -71,11 +57,9 @@ public class MainActivity extends ReactActivity {
         new VectorIconsPackage(),
         new ReactMaterialKitPackage(),
         new ReactNativeLocalizationPackage(),
-        //new MapsPackage(this),
-        //new AirPackage(this),
         new ImagePickerPackage(),
-        //new RCTSplashScreenPackage(this),
         new FabricPackage(this),
+        new RNWebIntentPackage(),
         mReactNativePushNotificationPackage
       );
     }
@@ -93,11 +77,6 @@ public class MainActivity extends ReactActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         Fabric.with(this, new Answers());
-
-        //debuggable
-        //Fabric fabric = new Fabric.Builder(this).debuggable(true).kits(new Answers()).build();
-        //Fabric.with(fabric);
-        //throw new RuntimeException("This is a crash");
     }
 
 
@@ -107,12 +86,5 @@ public class MainActivity extends ReactActivity {
         return CodePush.getBundleUrl();
     }
 
-    /*@Override
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new FacebookLoginPackage() // <------ add the package
-        );
-    }*/
 
 }

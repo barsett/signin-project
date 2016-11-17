@@ -4,6 +4,7 @@ import React, { Component, PropTypes} from 'react';
 import {
     ScrollView,
     Text,
+    TextInput,
     View,
     StyleSheet,
     TouchableHighlight,
@@ -13,17 +14,22 @@ import {
 
 
 var Icon = require('react-native-vector-icons/FontAwesome');
+var WebIntent = require('react-native-webintent');
 import { connect } from 'react-redux';
 import Button from 'react-native-button';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 import CheckBox from 'react-native-checkbox';
+import FloatLabelTextInput from '../components/FloatingLabel';
+import dismissKeyboard from 'dismissKeyboard';
+import { MKButton, MKSpinner, MKTextField, MKColor } from 'react-native-material-kit';
 
 import styles from '../styles/style';
 import i18n from '../i18n.js';
 import { updateReferenceData } from '../actions/ReferenceAction';
 import { getCorrectFontSizeForScreen, getCorrectShapeSizeForScreen, height, width } from '../api/Common.js';
 import SurveyStatisticCard from '../components/SurveyStatisticCard';
+import Sponsored from '../components/Sponsored';
 
 
 class HomeScreen extends React.Component {
@@ -31,6 +37,7 @@ class HomeScreen extends React.Component {
     super(props);
     this.state = {
       isChecked: false,
+      search: '',
     };
   }
   componentDidMount(){
@@ -43,11 +50,12 @@ class HomeScreen extends React.Component {
   };
     _getMenuCategory1(){
     return(
+    <View style={{padding: getCorrectShapeSizeForScreen(8)}}>
       <View style={localStyles.menuRow}>
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Icon style={localStyles.buttonIcon} name="group" />
               <Text style={localStyles.buttonText}> {i18n.construction} </Text>
             </View>
           </Button>
@@ -55,7 +63,7 @@ class HomeScreen extends React.Component {
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Icon style={localStyles.buttonIcon} name="lightbulb-o" />
               <Text style={localStyles.buttonText}> {i18n.creativeIndustry} </Text>
             </View>
           </Button>
@@ -63,29 +71,25 @@ class HomeScreen extends React.Component {
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Icon style={localStyles.buttonIcon} name="paint-brush" />
               <Text style={localStyles.buttonText}> {i18n.design} </Text>
             </View>
           </Button>
         </View>
-      </View>
-    );
-  }
-  _getMenuCategory2(){
-    return(
-      <View style={localStyles.menuRow}>
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Icon style={localStyles.buttonIcon} name="money" />
               <Text style={localStyles.buttonText}> {i18n.finance} </Text>
             </View>
           </Button>
         </View>
+      </View>
+      <View style={localStyles.menuRow}>
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Icon style={localStyles.buttonIcon} name="database" />
               <Text style={localStyles.buttonText}> {i18n.it} </Text>
             </View>
           </Button>
@@ -93,14 +97,16 @@ class HomeScreen extends React.Component {
         <View style={localStyles.buttonContainer}>
           <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
             <View style={{flexDirection: 'column', flex: 1}}>
-              <Icon style={localStyles.buttonIcon} name="file-text" />
+              <Icon style={localStyles.buttonIcon} name="legal" />
               <Text style={localStyles.buttonText}> {i18n.legal} </Text>
             </View>
           </Button>
         </View>
       </View>
+    </View>
     );
   }
+
   _logout(){
     //console.log("### LOGOUT ###");
     Alert.alert(
@@ -125,6 +131,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+      var searchIcon = <Icon style={styles.icon} color='white' name="search" size={25}/>;
       var content = <ScrollView style={localStyles.bg}>
                       <View style={localStyles.header}>
                         <View style={localStyles.headerContent}>
@@ -134,13 +141,23 @@ class HomeScreen extends React.Component {
                         </View>
                       </View>
                       <View style={{padding: getCorrectShapeSizeForScreen(8)}}>
-                        <SurveyStatisticCard/>
+                        <View style={localStyles.wrapper}>
+                          <SurveyStatisticCard/>
+                        </View>
                         <View style={localStyles.menuRow}>
                           <View style={localStyles.buttonContainer}>
                             <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
                               <View style={{flexDirection: 'column', flex: 1}}>
                                 <Icon style={localStyles.buttonIcon} name="inbox" />
                                 <Text style={localStyles.buttonText}> {i18n.mail} </Text>
+                              </View>
+                            </Button>
+                          </View>
+                          <View style={localStyles.buttonContainer}>
+                            <Button onPress={Actions.onProgress} style={localStyles.buttonText} containerStyle={localStyles.buttonItemMain}>
+                              <View style={{flexDirection: 'column', flex: 1}}>
+                                <Icon style={localStyles.buttonIcon} name="cloud-download" />
+                                <Text style={localStyles.buttonText}> {i18n.cloud} </Text>
                               </View>
                             </Button>
                           </View>
@@ -161,18 +178,44 @@ class HomeScreen extends React.Component {
                             </Button>
                           </View>
                         </View>
+                        <View style={localStyles.wrapper}>
+                          <Sponsored/>
+                        </View>
+                        <View style={localStyles.separator}>
+                        </View>
+                        <View style={localStyles.borderInput}>
+                          <FloatLabelTextInput
+                            ref="search"
+                            containerStyle={{ margin: getCorrectShapeSizeForScreen(0), paddingTop: getCorrectShapeSizeForScreen(8), backgroundColor: 'transparent'}}
+                            inputStyle={localStyles.textInput}
+                            floatingStyle={{color:'#24abe2',}}
+                            placeholder={"Search"}
+                            placeholderTextColor='#82c4e6'
+                            selectionColor='#FFFFFF'
+                            onChangeTextValue={text => this.setState({'search':text})}
+                            noBorder={true}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                          />
+                        </View>
+                        <MKButton
+                          style={localStyles.button}
+                          cornerRadius={21}
+                          >
+                          {searchIcon}
+                        </MKButton>
                         <View style={localStyles.separator}>
                         </View>
                         <View style={localStyles.menuRow}>
                           <Text style={localStyles.text1}>Job Listing </Text>
                           <Switch
                           onValueChange={(value) =>this.setState({falseSwitchIsOn: value})}
+                          onTintColor="#0f75bcff"
                           value={this.state.falseSwitchIsOn} />
                         </View>
                         <View style={localStyles.separator}>
                         </View>
                         {this.state.falseSwitchIsOn ? this._getMenuCategory1() : this._getMenuCategory1().hide}
-                        {this.state.falseSwitchIsOn ? this._getMenuCategory2() : this._getMenuCategory2().hide}
                       </View>
                     </ScrollView>
       return content;
@@ -184,6 +227,13 @@ const localStyles = StyleSheet.create({
     backgroundColor: '#e5e5e5',
     flex: 1,
   },
+  wrapper: {
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: getCorrectShapeSizeForScreen(4),
+  },
   menuRow: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -194,9 +244,9 @@ const localStyles = StyleSheet.create({
     marginHorizontal: getCorrectShapeSizeForScreen(4),
   },
   buttonItemMain: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     alignItems: 'center',
-    width: (width/3)-getCorrectShapeSizeForScreen(10),
+    width: (width/4)-getCorrectShapeSizeForScreen(10),
     paddingTop: getCorrectShapeSizeForScreen(20),
     paddingBottom: getCorrectShapeSizeForScreen(20),
   },
@@ -209,14 +259,25 @@ const localStyles = StyleSheet.create({
   buttonText: {
     color: '#0f75bcff',
     fontFamily: 'Roboto',
+    textAlign: 'center',
     fontSize: getCorrectFontSizeForScreen(12),
+  },
+  button: {
+    backgroundColor: '#0f75bcff',
+    padding: 5,
+    borderWidth: 0,
+    borderRadius: 3,
+    alignSelf: 'stretch',
+    height: 45 ? 45 : height,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header:{
     backgroundColor: '#0f75bcff',
     flex: 1,
     flexDirection: 'row',
     padding: getCorrectShapeSizeForScreen(20),
-    height: height/5,
+    height: height/10,
   },
   headerContent:{
     flex: 1,
@@ -251,6 +312,29 @@ const localStyles = StyleSheet.create({
     color: '#0f75bcff',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  borderInput: {
+    paddingBottom: getCorrectShapeSizeForScreen(5),
+    borderBottomWidth: 1,
+    borderBottomColor: '#82c4e6',
+		paddingHorizontal: 0,
+		marginRight: 0,
+		marginLeft: 0,
+    justifyContent: 'center',
+    marginBottom: getCorrectShapeSizeForScreen(10),
+	},
+  textInput: {
+ 		height: 45,
+ 		color: '#0f75bcff',
+ 		padding: 0,
+ 		fontFamily: 'Roboto',
+ 		textAlignVertical: 'center',
+ 		fontSize: getCorrectFontSizeForScreen(18),
+ 	},
+  icon: {
+    textAlignVertical: 'center',
+    justifyContent :'center',
+    alignItems : 'center',
   },
 });
 

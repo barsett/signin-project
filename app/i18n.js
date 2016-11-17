@@ -91,7 +91,7 @@ const i18n = new LocalizedStrings({
     screenSize: 'Screen size',
     finance: 'Finance',
     accounting: 'Accounting',
-    it: 'Informasi Teknologi',
+    it: 'Information Technology',
     design: 'Design',
     mail: 'Mail',
     education: 'Education',
@@ -99,7 +99,8 @@ const i18n = new LocalizedStrings({
     onProgress: 'On Progress',
     creativeIndustry: 'Creative Industry',
     construction: 'Construction',
-    legal: 'Legal System'
+    legal: 'Legal System',
+    cloud: 'Cloud'
   },
   id: {
     home:"Home",
@@ -188,7 +189,7 @@ const i18n = new LocalizedStrings({
     screenSize: 'Ukuran layar',
     finance: 'Finance',
     accounting: 'Accounting',
-    it: 'Informasi Teknologi',
+    it: 'Information Technology',
     design: 'Design',
     mail: 'Mail',
     education: 'Education',
@@ -196,7 +197,8 @@ const i18n = new LocalizedStrings({
     onProgress: 'On Progress',
     creativeIndustry: 'Creative Industry',
     construction: 'Construction',
-    legal: 'Legal System'
+    legal: 'Legal System',
+    cloud: 'Cloud'
   }
 });
 
