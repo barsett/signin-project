@@ -10,11 +10,12 @@ import {
     TouchableHighlight,
     Switch,
     Alert,
+    Dimensions,
+    Image,
 } from  'react-native';
 
 
 var Icon = require('react-native-vector-icons/FontAwesome');
-var WebIntent = require('react-native-webintent');
 import { connect } from 'react-redux';
 import Button from 'react-native-button';
 import { bindActionCreators } from 'redux';
@@ -31,6 +32,15 @@ import { getCorrectFontSizeForScreen, getCorrectShapeSizeForScreen, height, widt
 import SurveyStatisticCard from '../components/SurveyStatisticCard';
 import Sponsored from '../components/Sponsored';
 
+const _getURL = (action) => {
+     var url = '../img/img/';
+     switch (action) {
+         case "arief@ariefneiriza.com":
+             return url + 'arief';
+         default:
+             return url + 'default';
+     }
+ }
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -135,8 +145,11 @@ class HomeScreen extends React.Component {
       var content = <ScrollView style={localStyles.bg}>
                       <View style={localStyles.header}>
                         <View style={localStyles.headerContent}>
+                          <Image style={localStyles.image} source={require('../img/img/arief.png')} />
+                        </View>
+                        <View style={localStyles.headerContent}>
                           <Text style={localStyles.nameHeader}>
-                            {this.props.fullname}
+                            {this.props.username}
                           </Text>
                         </View>
                       </View>
@@ -223,6 +236,14 @@ class HomeScreen extends React.Component {
 }
 
 const localStyles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: 70,
+    height: 70,
+    borderRadius: 60,
+    backgroundColor: 'transparent',
+    resizeMode: 'contain',
+  },
   bg: {
     backgroundColor: '#e5e5e5',
     flex: 1,
@@ -277,7 +298,7 @@ const localStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: getCorrectShapeSizeForScreen(20),
-    height: height/10,
+    height: height/7,
   },
   headerContent:{
     flex: 1,
@@ -359,11 +380,3 @@ const mapDispatchToProps = (dispatch) => {
 
 //module.exports = connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
-
-
-{/*<Button onPress={Actions.task} text={i18n.taskList}/>
-<Button onPress={Actions.approvalList} text={i18n.approvalList}/>
-<Button onPress={Actions.setting} text={i18n.setting}/>
-<Button onPress={Actions.map} text={i18n.map}/>
-<Button onPress={Actions.camera} text={i18n.camera}/>
-<Button onPress={Actions.logout} text={i18n.logout}/>*/}

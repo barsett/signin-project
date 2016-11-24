@@ -28,7 +28,7 @@ export default class BannerScreen extends React.Component {
             <Image style={styles.image} source={require('../img/orca.png')} />
           </View>
           <View style={styles.slide2}>
-            <Text style={styles.text}>YOUR ADS GOES HERE</Text>
+            <Image style={styles.image} source={require('../img/sponsored2.png')} />
           </View>
           <View style={styles.slide3}>
             <Text style={styles.text}>YOUR ADS GOES HERE</Text>

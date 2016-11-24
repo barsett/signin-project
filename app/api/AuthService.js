@@ -24,11 +24,11 @@ import { timeout, categorizeError } from '../api/Common';
      let url = SERVER_URL;
      switch (action) {
          case "login":
-             return url + LOGIN_URI;
+             return url;
          case "tokenCheck":
-             return url + TOKEN_CHECK_URI;
+             return url;
          case "pushToken":
-             return url + REGISTER_PUSH_TOKEN_URI;
+             return url;
          default:
              return url;
      }
@@ -68,9 +68,6 @@ import { timeout, categorizeError } from '../api/Common';
 
              })
              .catch((err) => {
-                 //console.log("ERROR", err.message);
-                //  if (err.message) throw err.message;
-                //  else throw err;
                  const catError = categorizeError(err);
                  throw catError;
              });

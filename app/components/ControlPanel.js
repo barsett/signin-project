@@ -12,7 +12,6 @@ import {
     Alert,
 } from 'react-native';
 
-var WebIntent = require('react-native-webintent');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var Actions = require('react-native-router-flux').Actions;
 var curDate = new Date();
@@ -32,13 +31,9 @@ class ControlPanel extends React.Component{
     }
 
     _selectMenu(selectedAction){
-      //console.log(this.context);
       var {drawer} = this.context;
-      // route to page
-      //this.props.close();
       selectedAction();
       drawer.close();
-      // close drawer
     }
 
     _getSurveyorMenu(){
@@ -188,10 +183,6 @@ class ControlPanel extends React.Component{
                           <Text style={localStyles.dateText}>{formatDate(curDate)}</Text>
                         </View>
                         <View style={localStyles.downInsideImg}>
-                          {/* requested by JR on 19 Juli 2016
-                            <View style={localStyles.borderUser}>
-                              <Icon style={localStyles.iconImg} name="user" />
-                            </View>*/}
                           <View style={localStyles.headerTextWrap}>
                               <Text style={localStyles.headerText} >{this.props.currentUser}</Text>
                           </View>
