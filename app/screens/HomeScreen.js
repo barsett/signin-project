@@ -145,7 +145,7 @@ class HomeScreen extends React.Component {
       var content = <ScrollView style={localStyles.bg}>
                       <View style={localStyles.header}>
                         <View style={localStyles.headerContent}>
-                          <Image style={localStyles.image} source={require('../img/img/arief.png')} />
+                          <Image style={localStyles.image} source={require('../img/img/default.png')} />
                         </View>
                         <View style={localStyles.headerContent}>
                           <Text style={localStyles.nameHeader}>
